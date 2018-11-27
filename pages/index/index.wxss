@@ -1,0 +1,65 @@
+/**index.wxss**/
+.container {
+  background-color: #fff;
+  height: 100vh;
+  width: 100%;
+}
+.swiper-wrap{
+  width: 100%;
+}
+.swiper-wrap .slide-image{
+  width: 100%;
+  max-width: 100%;
+  height: 180px;
+}
+.boxIndex{
+  padding: 0 30rpx;
+}
+.titleIndex{
+  font-size: 30rpx;
+  height: 100rpx;
+  display: flex;
+  flex-direction:row ;
+  align-items: center;
+  font-weight: bold;
+}
+.titleIcon{
+  width: 37rpx;
+  height: 32rpx;
+  margin-right: 10rpx;
+}
+.aboutMe{
+  font-size: 26rpx;
+  display: block;
+  line-height: 1.75;
+  padding: 0 30rpx;
+  margin-bottom: 30rpx;
+}
+.jianceList{
+  margin-bottom: 30rpx;
+}
+.jianceList .list{
+  height: 60rpx;
+  font-size: 26rpx;
+  padding: 0 30rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.jianceList .list .textWorld{
+  white-space: nowrap;
+  display: inline-block;
+  width: 72%;
+  overflow: hidden;
+  text-overflow:ellipsis;
+}
+.jianceList .list:nth-child(odd){
+  background:#fbfbfb;
+}
+.hrBorder{
+  background: #f8f8f8;
+  height: 15rpx;
+  display: block;
+}
+
