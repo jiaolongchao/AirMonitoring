@@ -1,0 +1,12 @@
+<view class='rich_media_inner'>
+  <view class='rich_media_area_primary'>
+    <view class='rich_media_area_primary_inner'>
+      <text class='rich_media_title'> 中智外企服务分公司办公室空气质量监测数据</text>
+      <view class='rich_media_meta_list'>
+        <text class='rich_media_meta_text'>监测方:</text>
+        <text class='rich_media_meta_nickname'>理工</text>
+        <text class='rich_media_meta_text'>昨天</text>
+      </view>
+    </view>
+  </view>
+</view>

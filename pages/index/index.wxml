@@ -9,13 +9,14 @@
       </block>
     </swiper>
   </view>
+  <view class='hrBorder'></view>
   <view class='boxIndex'>
     <view class='titleIndex'>
       <image src='images/icon1.png' class='titleIcon'></image>
       <text>中智空气监测</text>
     </view>
     <view class='jianceList'>
-      <view class='list' wx:for='{{listTexts}}' wx:key='index'>
+      <view class='list' wx:for='{{listTexts}}' wx:key='index' data-index='{{index}}' bindtap='goArticleInfo'>
         <text class='textWorld'>{{item.text}}</text>
         <text class='dataWorld'>{{item.data}}</text>
       </view>
@@ -32,4 +33,7 @@
     </view>
   </view>
   <view class='hrBorder'></view>
+  <view>
+
+  </view>
 </view>

@@ -1,0 +1,29 @@
+.rich_media_inner{
+  position: relative;
+}
+.rich_media_area_primary{
+  background: #fff;
+  padding: 20rpx 30rpx 30rpx;
+}
+.rich_media_title{
+    display: block;
+    font-size: 30rpx;
+    line-height: 1.4;
+    margin-bottom: 15rpx;
+}
+.rich_media_meta_list{
+    margin-bottom: 22rpx;
+    display: flex;
+    align-items:center;
+    justify-content: flex-start;
+    height: 30rpx;
+    font-size: 24rpx;
+}
+.rich_media_meta_text{
+  color: rgba(0,0,0,0.3);
+  margin-right: 10rpx;
+}
+.rich_media_meta_nickname{
+  color: #576b95;
+  margin-right: 10rpx;
+}
