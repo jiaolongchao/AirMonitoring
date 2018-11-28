@@ -29,7 +29,9 @@
       <text>关于我们</text>
     </view>
     <view class='aboutMe'>
-      <text>中国国际技术智力合作有限公司欢迎广大员工关注联建工程官方公众号，此公众号将作为贵公司办公区日常空气质量监测数据发布途径之一，关注后可以随时接收相关数据发布信息（此信息发布经过中国国际技术智力技术有限公司外企服务分公司授权公司地址：联系人：</text>
+      <text>{{name}}</text>
+      <text>地址：{{adress}}</text>
+      <text>联系人：{{phone}}</text>
     </view>
   </view>
   <view class='hrBorder'></view>

@@ -1,29 +1,128 @@
-.rich_media_inner{
+.rich_media_inner {
   position: relative;
 }
-.rich_media_area_primary{
+
+.rich_media_area_primary {
   background: #fff;
   padding: 20rpx 30rpx 30rpx;
 }
-.rich_media_title{
-    display: block;
-    font-size: 30rpx;
-    line-height: 1.4;
-    margin-bottom: 15rpx;
+
+.rich_media_title {
+  display: block;
+  font-size: 34rpx;
+  line-height: 1.4;
+  margin-bottom: 15rpx;
 }
-.rich_media_meta_list{
-    margin-bottom: 22rpx;
-    display: flex;
-    align-items:center;
-    justify-content: flex-start;
-    height: 30rpx;
-    font-size: 24rpx;
+
+.rich_media_meta_list {
+  margin-bottom: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 30rpx;
+  font-size: 24rpx;
 }
-.rich_media_meta_text{
-  color: rgba(0,0,0,0.3);
+
+.rich_media_meta_text {
+  color: rgba(0, 0, 0, 0.3);
   margin-right: 10rpx;
 }
-.rich_media_meta_nickname{
+
+.rich_media_meta_nickname {
   color: #576b95;
   margin-right: 10rpx;
+}
+
+.rich_media_content {
+  overflow: hidden;
+  color: #333;
+  font-size: 20rpx;
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  text-align: justify;
+}
+.subtitle {
+  display: block;
+  text-align: left;
+  font-size: 26rpx;
+  margin-bottom: 20rpx;
+}
+.tabTitWrap{
+  position: relative;
+}
+.tabTitWrap .tableTitle{
+  display: block;
+  text-align: center;
+  font-size: 24rpx;
+  margin-bottom: 5rpx;
+}
+.tabTitWrap .tableTitles{
+  display: block;
+  text-align: center;
+  font-size: 22rpx;
+  margin-bottom: 10rpx;
+}
+.tabTitWrap .tableTime{
+  display: inline-block;
+  font-size: 22rpx;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.rich_table{
+  width: 100%;
+  box-sizing: border-box;
+}
+.rich_table .rich_tr{
+  width: 100%;
+  height: 65rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.rich_table .rich_tr:nth-child(odd){
+  background: #f8f8f8;
+}
+.rich_table .rich_tr:last-child{
+  background:Red!important;
+  color: #fff;
+}
+.rich_table .rich_tr:nth-last-child(2){
+  background: blue!important;
+  color: #fff;
+}
+.rich_table .rich_tr:nth-last-child(3){
+  background: green!important;
+  color: #fff;
+}
+.rich_table .rich_tr_title{
+  align-items: flex-start;
+  height: 70rpx;
+  padding-top: 10rpx;
+}
+.rich_table .rich_tr .rich_th{
+  font-weight: bold;
+}
+.rich_table .rich_tr .rich_th,.rich_table .rich_tr .rich_td{
+  text-align: center;
+  width: 20%;
+}
+.contentWrap{
+  padding:30rpx 0;
+  font-size: 24rpx;
+  line-height: 1.75;
+}
+.statement{
+  padding:30rpx 0;
+  font-size: 24rpx;
+  line-height: 1.75;
+  text-indent: 48rpx;
+}
+.statement .statment_img{
+  display: block;
+  width: 300rpx;
+  height: 300rpx;
+  margin: 10rpx auto;
 }

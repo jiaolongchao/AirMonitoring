@@ -35,6 +35,11 @@
   padding: 0 30rpx;
   margin-bottom: 30rpx;
 }
+.aboutMe text{
+  display: block;
+  margin-bottom: 5rpx;
+  line-height: 1.7;
+}
 .jianceList{
   margin-bottom: 30rpx;
 }

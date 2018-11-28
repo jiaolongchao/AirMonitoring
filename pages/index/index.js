@@ -3,7 +3,7 @@
 const app = getApp()
 Page({
   data: {
-    imgUrls: [
+    imgUrls: [ //轮播放图片
       'images/01.jpg',
       'images/02.jpg',
       'images/03.jpg',
@@ -13,7 +13,7 @@ Page({
     autoplay: true,
     interval: 5000,
     duration: 1000,
-    listTexts: [
+    listTexts: [ //中智空气监测信息列表
       {
         text: "中智外企服务分公司办公室空气质量监测数质量监测数",
         data: "2018.11.20",
@@ -25,12 +25,30 @@ Page({
         thumb_upid: 1
       },
       {
-        text: "空气",
+        text: "雾霾太多",
+        data: "2018.11.20",
+        thumb_upid: 2
+      },
+      {
+        text: "雾霾太多雾霾太多雾霾太多雾霾太多",
+        data: "2018.11.20",
+        thumb_upid: 2
+      },
+      {
+        text: "空气质量太差 我就测试空格",
+        data: "2018.11.20",
+        thumb_upid: 2
+      },
+      {
+        text: "要起飞飞飞",
         data: "2018.11.20",
         thumb_upid: 2
       }
     ],
-    airPmList: []
+    airPmList: [], //测试用暂时没用 
+    name:"中国国际技术智力合作有限公司公司", //公司名称
+    adress:"公司地址",
+    phone:"15810464326" 
   },
   goArticleInfo: function (e) {
     var index = parseInt(e.currentTarget.dataset.index);
