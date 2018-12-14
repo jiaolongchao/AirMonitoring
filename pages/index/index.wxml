@@ -14,6 +14,7 @@
     <view class='titleIndex'>
       <image src='images/icon1.png' class='titleIcon'></image>
       <text>中智空气监测</text>
+      <text class='more'>更多</text>
     </view>
     <view class='jianceList'>
       <view class='list' wx:for='{{listTexts}}' wx:key='index' data-index='{{index}}' bindtap='goArticleInfo'>

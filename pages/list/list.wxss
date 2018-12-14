@@ -4,13 +4,14 @@
   height: 100vh;
   width: 100%;
 }
-.swiper-wrap{
+.advertising{
   width: 100%;
+  height: 300rpx;
+  overflow: hidden;
 }
-.swiper-wrap .slide-image{
+.advertising image{
   width: 100%;
   max-width: 100%;
-  height: 175px;
 }
 .boxIndex{
   padding: 0 30rpx;
