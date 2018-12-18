@@ -2,7 +2,7 @@
 <view class="container">
   <image src='images/01.jpg' class='advertising'></image>
   <view class='jianceList'>
-    <scroll-view scroll-y='true' style="height: 410px" bindscrolltolower='lower'>
+    <scroll-view scroll-y='true' style="height: {{height}}" bindscrolltolower='lower'>
       <view wx:for="{{listTexts}}" class='list' data-id="{{index}}" wx:key="{{index}}" bindtap='goArticleInfo'>
         <text class='textWorld'>{{item.title}}</text>
         <text class='dataWorld'>{{item.date}}</text>

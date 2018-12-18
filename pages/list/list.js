@@ -16,8 +16,8 @@ Page({
     ],
     height: '',
     pagenum: 1,
-    pagesize: 14,
-    totalPages: ''
+    pagesize: 15,
+    totalPages: '',
   },
   goArticleInfo: function(e) {
     var index = parseInt(e.currentTarget.dataset.id);
@@ -30,7 +30,6 @@ Page({
     var resArr = [];
     var that = this;
     this.data.pagenum++;
-
     if (this.data.pagenum > this.data.totalPages) {
       wx.showToast({ //如果全部加载完成了也弹一个框
         title: '我也是有底线的',
@@ -43,31 +42,29 @@ Page({
         title: '加载中',
         icon: 'loading',
       });
-      setTimeout(() => {
-        wx.request({ //获取列表
-          url: utils.SYNC_TABLE_URL + 'air/news/list?pagenum=' + that.data.pagenum + '&pagesize=' + that.data.pagesize,
-          method: "GET",
-          header: {
-            'spatial': '000000000000000000000000'
-          },
-          success: function(res) {
-            var data = res.data.data.newsList;
-            data.map((item) => {
-              //item.date = utils.formatTimeTwo(item.date, 'Y/M/D')
-              item.date = moment(item.date).format('l');
-            })
-            var cont = result.concat(data);
-            that.setData({
-              listTexts: cont
-            });
-          },
-          fail: function() {
-            console.log("监测数据接口调用失败");
-          }
-        })
-
-        wx.hideLoading();
-      }, 1500)
+      wx.request({ //获取列表
+        url: utils.SYNC_TABLE_URL + 'air/news/list?pagenum=' + that.data.pagenum + '&pagesize=' + that.data.pagesize,
+        method: "GET",
+        header: {
+          'spatial': '000000000000000000000000'
+        },
+        success: function (res) {
+          var data = res.data.data.newsList;
+          data.map((item) => {
+            //item.date = utils.formatTimeTwo(item.date, 'Y/M/D')
+            item.date = moment(item.date).format('l');
+          })
+          var cont = result.concat(data);
+          that.setData({
+            listTexts: cont,
+          });
+          wx.hideLoading();
+        },
+        fail: function () {
+          console.log("监测数据接口调用失败");
+        }
+      })
+      
     }
 
   },
@@ -99,9 +96,10 @@ Page({
     wx.getSystemInfo({
       success: (res) => {
         this.setData({
-          height: res.windowHeight
+          height: res.windowHeight - 200 + "px"
         })
       }
     })
+    console.log(this.data.height)
   }
 })

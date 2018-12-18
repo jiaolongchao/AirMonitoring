@@ -1,5 +1,12 @@
 var utils = require('../../utils/util.js');
 var WxParse = require('../../wxParse/wxParse.js');
+const moment = require('../../utils/moment.min.js');
+moment.locale('en', {
+  longDateFormat: {
+    l: "YYYY-MM-DD",
+    L: "YYYY-MM-DD HH:mm"
+  }
+});
 const app = getApp()
 Page({
   data: {
@@ -37,7 +44,7 @@ Page({
          */
         that.setData({
           title: data.title,
-          date: utils.formatTimeTwo(data.date, 'Y/M/D'),
+          date: moment(data.date).format('l'),
           content: WxParse.wxParse('content', 'html', data.content, that, 5),
           source: data.source,
           dataList: dataList
