@@ -1,110 +1,48 @@
-var api = require('../../utils/util.js')
+var utils = require('../../utils/util.js');
+var WxParse = require('../../wxParse/wxParse.js');
 const app = getApp()
 Page({
   data: {
-    tableContent: [//表格数据
-      {
-        th_title: "室外测试值",
-        pm: 47,
-        co2: 400,
-        hcho: 0.44,
-        vocs: 0.001
-      },
-      {
-        th_title: "6层东区前台",
-        pm: 48,
-        co2: 400,
-        hcho: 0.44,
-        vocs: 0.001
-      },
-      {
-        th_title: "6层南侧办公区",
-        pm: 49,
-        co2: 400,
-        hcho: 0.44,
-        vocs: 0.001
-      },
-      {
-        th_title: "西区前台",
-        pm: 47,
-        co2: 400,
-        hcho: 0.44,
-        vocs: 0.001
-      },
-      {
-        th_title: "北侧办公区",
-        pm: 47,
-        co2: 400,
-        hcho: 0.44,
-        vocs: 0.001
-      },
-      {
-        th_title: "服务大厅",
-        pm: 47,
-        co2: 400,
-        hcho: 0.44,
-        vocs: 0.001
-      },
-      {
-        th_title: "5B18办公区",
-        pm: 47,
-        co2: 400,
-        hcho: 0.44,
-        vocs: 0.001
-      },
-      {
-        th_title: "B3值班室",
-        pm: 47,
-        co2: 400,
-        hcho: 0.44,
-        vocs: 0.001
-      },
-      {
-        th_title: "室内测试平均值",
-        pm: 47,
-        co2: 400,
-        hcho: 0.44,
-        vocs: 0.001
-      },
-      {
-        th_title: "健康值",
-        pm: "35<检测值",
-        co2: "1000检测值",
-        hcho: "0.44<检测值",
-        vocs: "0.001<检测值"
-      },
-      {
-        th_title: "数值",
-        pm: "35<检测值",
-        co2: "1000检测值",
-        hcho: "0.44<检测值",
-        vocs: "0.001<检测值"
-      },
-      {
-        th_title: "超标值",
-        pm: "35<检测值",
-        co2: "1000检测值",
-        hcho: "0.44<检测值",
-        vocs: "0.001<检测值"
-      }
+    dataList: [ //表格数据
     ],
     thumb_upid: null,
-    title:"中智外企服务分公司办公室空气质量监测数据",
-    time:"2018.11.26",
-    articleContent: "此处为正文处内容包括图片文字"  //文章内容数据
+    title: "",
+    date: "",
+    source: "",
+    content: "" //文章内容数据
   },
-  onLoad: function (options) {
+  onLoad: function(options) {
+    console.log(options)
     var that = this;
     that.setData({
       thumb_upid: options.thumb_upid
     })
-    // wx.request({
-    //   url: api.SYNC_TABLE_URL + '?id=' + this.data.thumb_upid, //文章内容接口
-    //   success:function(res){
-    //     that.setData({
-    //       articleContent:res.data.data.list
-    //     })
-    //   }
-    // })
+    wx.request({
+      url: utils.SYNC_TABLE_URL + 'air/news/get?newsid=' + this.data.thumb_upid, //文章内容接口
+      method: "GET",
+      header: {
+        'spatial': '000000000000000000000000'
+      },
+      success: function(res) {
+        console.log(res.data.data)
+        var data = res.data.data.news;
+        var dataList = res.data.data.dataList;
+        /** 
+         * WxParse.wxParse(bindName , type, data, target,imagePadding) 
+         * 1.bindName绑定的数据名(必填) 
+         * 2.type可以为html或者md(必填) 
+         * 3.data为传入的具体数据(必填) 
+         * 4.target为Page对象,一般为this(必填) 
+         * 5.imagePadding为当图片自适应是左右的单一padding(默认为0,可选) 
+         */
+        that.setData({
+          title: data.title,
+          date: utils.formatTimeTwo(data.date, 'Y/M/D'),
+          content: WxParse.wxParse('content', 'html', data.content, that, 5),
+          source: data.source,
+          dataList: dataList
+        })
+      }
+    })
   }
 })

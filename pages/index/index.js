@@ -1,80 +1,86 @@
 //index.js
 //获取应用实例
+var utils = require('../../utils/util.js');
 const app = getApp()
 Page({
   data: {
-    imgUrls: [ //轮播放图片
-      'images/01.jpg',
-      'images/02.jpg',
-      'images/03.jpg',
-      'images/04.jpg'
-    ],
+    imgUrls: [], //轮播放图片
     indicatorDots: true,
     autoplay: true,
     interval: 5000,
     duration: 1000,
-    listTexts: [ //中智空气监测信息列表
-      {
-        text: "中智外企服务分公司办公室空气质量监测数质量监测数",
-        data: "2018.11.20",
-        thumb_upid:0
-      },
-      {
-        text: "空气质量监测数",
-        data: "2018.11.20",
-        thumb_upid: 1
-      },
-      {
-        text: "雾霾太多",
-        data: "2018.11.20",
-        thumb_upid: 2
-      },
-      {
-        text: "雾霾太多雾霾太多雾霾太多雾霾太多",
-        data: "2018.11.20",
-        thumb_upid: 2
-      },
-      {
-        text: "空气质量太差 我就测试空格",
-        data: "2018.11.20",
-        thumb_upid: 2
-      },
-      {
-        text: "要起飞飞飞",
-        data: "2018.11.20",
-        thumb_upid: 2
-      }
-    ],
-    airPmList: [], //测试用暂时没用 
-    name:"中国国际技术智力合作有限公司公司", //公司名称
-    adress:"公司地址",
-    phone:"15810464326" 
+    listTexts: [], //中智空气监测信息列表
+    name: "", //公司名称
+    adress: "",
+    phone: ""
   },
-  goArticleInfo: function (e) {
+  goArticleInfo: function(e) {
     var index = parseInt(e.currentTarget.dataset.index);
     console.log(index)
     wx.navigateTo({
-      url: '../article/article?thumb_upid=' + this.data.listTexts[index].thumb_upid,
+      url: '../article/article?thumb_upid=' + this.data.listTexts[index].id,
     })
   },
-  onLoad: function () {
-    // var that = this;
-    // wx.request({
-    //   url: 'http://web.juhe.cn:8080/environment/air/pm?city=%E5%8C%97%E4%BA%AC&key=623e1ac940908178af50be5d80b34020',
-    //   method: "GET",
-    //   header: {
-    //     'content-type': 'application/json' // 默认值
-    //   },
-    //   success: function (res) {
-    //     console.log(res.data.subjects);
-    //     var date = res.data.subjects;
-    //     that.setData({
-    //       airPmList: date
-    //     })
-    //   },
-    //   fail: function () {
-    //     console.log("接口调用失败");
-    //   }
-    // })
+  onLoad: function() {
+    var that = this;
+    wx.request({ //banner轮播
+      url: utils.SYNC_TABLE_URL + 'air/ad/list',
+      method: "GET",
+      header: {
+        'spatial': '000000000000000000000000'
+      },
+      success: function(res) {
+        var data = res.data.data;
+        var newData = data.filter(item => item.isuse != 1)
+        console.log(newData);
+        that.setData({
+          imgUrls: newData
+        })
+      },
+      fail: function() {
+        console.log("banner轮播接口调用失败");
+      }
+    })
+
+    wx.request({ //获取列表
+      url: utils.SYNC_TABLE_URL + 'air/news/list?pagenum=1&pagesize=7',
+      method: "GET",
+      header: {
+        'spatial': '000000000000000000000000'
+      },
+      success: function(res) {
+        var data = res.data.data.newsList;
+        console.log(data);
+        data.map((item) => {
+          item.date = utils.formatTimeTwo(item.date, 'Y/M/D')
+        })
+        that.setData({
+          listTexts: data
+        })
+      },
+      fail: function() {
+        console.log("监测数据接口调用失败");
+      }
+    })
+
+    wx.request({ //关于我们
+      url: utils.SYNC_TABLE_URL + 'air/about/get',
+      method: "GET",
+      header: {
+        'spatial': '000000000000000000000000'
+      },
+      success: function(res) {
+        console.log(res.data.data);
+        var data = res.data.data;
+        that.setData({
+          name: data.description,
+          adress: data.addr,
+          phone: data.tel
+        })
+      },
+      fail: function() {
+        console.log("关于我们接口调用失败");
+      }
+    })
   }
 })

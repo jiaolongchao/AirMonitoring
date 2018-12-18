@@ -24,7 +24,7 @@
   font-weight: bold;
   position: relative;
 }
-.titleIndex .more{
+.titleIndex navigator{
   display:block;
   position: absolute;
   right: 0;
@@ -52,7 +52,7 @@
 .jianceList{
   margin-bottom: 30rpx;
 }
-.jianceList .list{
+.jianceList .list navigator{
   height: 60rpx;
   font-size: 26rpx;
   padding: 0 30rpx;

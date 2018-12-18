@@ -1,3 +1,4 @@
+@import "../../wxParse/wxParse.wxss";
 .rich_media_inner {
   position: relative;
 }
