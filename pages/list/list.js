@@ -1,113 +1,23 @@
 //index.js
 //获取应用实例
+var utils = require('../../utils/util.js');
 const app = getApp()
 Page({
   data: {
     listTexts: [ //中智空气监测信息列表
-      {
-        text: "中智外企服务分公司办公室空气质量监测数质量监测数",
-        data: "2018.11.20",
-        thumb_upid: 0
-      },
-      {
-        text: "空气质量监测数",
-        data: "2018.11.20",
-        thumb_upid: 1
-      },
-      {
-        text: "雾霾太多",
-        data: "2018.11.20",
-        thumb_upid: 2
-      },
-      {
-        text: "雾霾太多雾霾太多雾霾太多雾霾太多",
-        data: "2018.11.20",
-        thumb_upid: 2
-      },
-      {
-        text: "空气质量太差 我就测试空格",
-        data: "2018.11.20",
-        thumb_upid: 2
-      },
-      {
-        text: "要起飞飞飞",
-        data: "2018.11.20",
-        thumb_upid: 2
-      },
-      {
-        text: "中智外企服务分公司办公室空气质量监测数质量监测数",
-        data: "2018.11.20",
-        thumb_upid: 0
-      },
-      {
-        text: "空气质量监测数",
-        data: "2018.11.20",
-        thumb_upid: 1
-      },
-      {
-        text: "雾霾太多",
-        data: "2018.11.20",
-        thumb_upid: 2
-      },
-      {
-        text: "雾霾太多雾霾太多雾霾太多雾霾太多",
-        data: "2018.11.20",
-        thumb_upid: 2
-      },
-      {
-        text: "空气质量太差 我就测试空格",
-        data: "2018.11.20",
-        thumb_upid: 2
-      },
-      {
-        text: "要起飞飞飞",
-        data: "2018.11.20",
-        thumb_upid: 2
-      },
-      {
-        text: "中智外企服务分公司办公室空气质量监测数质量监测数",
-        data: "2018.11.20",
-        thumb_upid: 0
-      },
-      {
-        text: "空气质量监测数",
-        data: "2018.11.20",
-        thumb_upid: 1
-      },
-      {
-        text: "雾霾太多",
-        data: "2018.11.20",
-        thumb_upid: 2
-      },
-      {
-        text: "雾霾太多雾霾太多雾霾太多雾霾太多",
-        data: "2018.11.20",
-        thumb_upid: 2
-      },
-      {
-        text: "空气质量太差 我就测试空格",
-        data: "2018.11.20",
-        thumb_upid: 2
-      },
-      {
-        text: "要起飞飞飞",
-        data: "2018.11.20",
-        thumb_upid: 2
-      }
     ],
-    airPmList: [], //测试用暂时没用
     height: '',
-    res: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    pagenum: 1,
+    pagesize: 14
   },
   goArticleInfo: function(e) {
-    var index = parseInt(e.currentTarget.dataset.index);
-    console.log(index)
+    var index = parseInt(e.currentTarget.dataset.id);
     wx.navigateTo({
-      url: '../article/article?thumb_upid=' + this.data.listTexts[index].thumb_upid,
+      url: '../article/article?thumb_upid=' + this.data.listTexts[index].id,
     })
   },
   lower() {
-    var result = this.data.res;
+    var result = this.data.listTexts;
     var resArr = [];
     for (let i = 0; i < 10; i++) {
       resArr.push(i);
@@ -128,13 +38,35 @@ Page({
       });
       setTimeout(() => {
         this.setData({
-          res: cont
+          listTexts: cont
         });
         wx.hideLoading();
       }, 1500)
     }
   },
   onLoad: function(options) {
+    var that = this;
+    wx.request({ //获取列表
+      url: utils.SYNC_TABLE_URL + 'air/news/list?pagenum=' + that.data.pagenum + '&pagesize=' + that.data.pagesize,
+      method: "GET",
+      header: {
+        'spatial': '000000000000000000000000'
+      },
+      success: function(res) {
+        var data = res.data.data.newsList;
+        console.log(data);
+        data.map((item) => {
+          item.date = utils.formatTimeTwo(item.date, 'Y/M/D')
+        })
+        that.setData({
+          listTexts: data
+        })
+      },
+      fail: function() {
+        console.log("监测数据接口调用失败");
+      }
+    })
+
     wx.getSystemInfo({
       success: (res) => {
         this.setData({

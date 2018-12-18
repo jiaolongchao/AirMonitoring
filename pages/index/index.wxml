@@ -20,10 +20,10 @@
     </view>
     <view class='jianceList'>
       <view class='list' wx:for='{{listTexts}}' wx:key='index' data-index='{{index}}' bindtap='goArticleInfo'>
-        <navigator url="/pages/article/article?thumb_upid={{item.id}}">
-          <text class='textWorld'>{{item.title}}</text>
+        <!-- <navigator url="/pages/article/article?thumb_upid={{item.id}}">
+        </navigator> -->
+        <text class='textWorld'>{{item.title}}</text>
           <text class='dataWorld'>{{item.date}}</text>
-        </navigator>
       </view>
     </view>
   </view>

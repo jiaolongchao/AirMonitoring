@@ -52,7 +52,7 @@
 .jianceList{
   margin-bottom: 30rpx;
 }
-.jianceList .list navigator{
+.jianceList .list{
   height: 60rpx;
   font-size: 26rpx;
   padding: 0 30rpx;

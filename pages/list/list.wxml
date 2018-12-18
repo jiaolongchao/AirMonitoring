@@ -4,8 +4,8 @@
   <view class='jianceList'>
     <scroll-view scroll-y='true' style="height: 410px" bindscrolltolower='lower'>
       <view wx:for="{{listTexts}}" class='list' data-id="{{index}}" wx:key="{{index}}" bindtap='goArticleInfo'>
-        <text class='textWorld'>{{item.text}}</text>
-        <text class='dataWorld'>{{item.data}}</text>
+        <text class='textWorld'>{{item.title}}</text>
+        <text class='dataWorld'>{{item.date}}</text>
       </view>
     </scroll-view>
   </view>
