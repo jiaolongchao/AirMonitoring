@@ -1,6 +1,14 @@
 //index.js
 //获取应用实例
-var utils = require('../../utils/util.js');
+const utils = require('../../utils/util.js');
+const moment = require('../../utils/moment.min.js');
+moment.locale('en', {
+  longDateFormat: {
+    l: "YYYY-MM-DD",
+    L: "YYYY-MM-DD HH:mm"
+  }
+});
+
 const app = getApp()
 Page({
   data: {
@@ -8,7 +16,8 @@ Page({
     ],
     height: '',
     pagenum: 1,
-    pagesize: 14
+    pagesize: 14,
+    totalPages: ''
   },
   goArticleInfo: function(e) {
     var index = parseInt(e.currentTarget.dataset.id);
@@ -19,12 +28,10 @@ Page({
   lower() {
     var result = this.data.listTexts;
     var resArr = [];
-    for (let i = 0; i < 10; i++) {
-      resArr.push(i);
-    };
-    var cont = result.concat(resArr);
-    console.log(resArr.length);
-    if (cont.length >= 100) {
+    var that = this;
+    this.data.pagenum++;
+
+    if (this.data.pagenum > this.data.totalPages) {
       wx.showToast({ //如果全部加载完成了也弹一个框
         title: '我也是有底线的',
         icon: 'success',
@@ -37,12 +44,32 @@ Page({
         icon: 'loading',
       });
       setTimeout(() => {
-        this.setData({
-          listTexts: cont
-        });
+        wx.request({ //获取列表
+          url: utils.SYNC_TABLE_URL + 'air/news/list?pagenum=' + that.data.pagenum + '&pagesize=' + that.data.pagesize,
+          method: "GET",
+          header: {
+            'spatial': '000000000000000000000000'
+          },
+          success: function(res) {
+            var data = res.data.data.newsList;
+            data.map((item) => {
+              //item.date = utils.formatTimeTwo(item.date, 'Y/M/D')
+              item.date = moment(item.date).format('l');
+            })
+            var cont = result.concat(data);
+            that.setData({
+              listTexts: cont
+            });
+          },
+          fail: function() {
+            console.log("监测数据接口调用失败");
+          }
+        })
+
         wx.hideLoading();
       }, 1500)
     }
+
   },
   onLoad: function(options) {
     var that = this;
@@ -54,12 +81,14 @@ Page({
       },
       success: function(res) {
         var data = res.data.data.newsList;
-        console.log(data);
+        var totalpages = res.data.data.totalPages;
         data.map((item) => {
-          item.date = utils.formatTimeTwo(item.date, 'Y/M/D')
+          //item.date = utils.formatTimeTwo(item.date, 'Y/M/D')
+          item.date = moment(item.date).format('l');
         })
         that.setData({
-          listTexts: data
+          listTexts: data,
+          totalPages: totalpages
         })
       },
       fail: function() {

@@ -1,6 +1,14 @@
 //index.js
 //获取应用实例
-var utils = require('../../utils/util.js');
+const utils = require('../../utils/util.js');
+const moment = require('../../utils/moment.min.js');
+moment.locale('en', {
+  longDateFormat: {
+    l: "YYYY-MM-DD",
+    L: "YYYY-MM-DD HH:mm"
+  }
+});
+
 const app = getApp()
 Page({
   data: {
@@ -52,7 +60,8 @@ Page({
         var data = res.data.data.newsList;
         console.log(data);
         data.map((item) => {
-          item.date = utils.formatTimeTwo(item.date, 'Y/M/D')
+          //item.date = utils.formatTimeTwo(item.date, 'Y/M/D')
+          item.date = moment(item.date).format('l');
         })
         that.setData({
           listTexts: data
